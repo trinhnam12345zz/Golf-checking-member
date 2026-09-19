@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Python & Environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+
+# Graphify temporary & cache files
+.graphify_detect.json
+.graphify_ast.json
+.graphify_extract.json
+.graphify_analysis.json
+.graphify_labels.json
+.graphify_cached.json
+.graphify_uncached.txt
+.graphify_semantic_new.json
+.graphify_semantic.json
+graphify-out/cache/
+
+# System files
+Thumbs.db
+.DS_Store
+*.log
