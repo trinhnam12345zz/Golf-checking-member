@@ -1,0 +1,62 @@
+{
+  "name": "golf-checking-member",
+  "version": "1.0.0",
+  "description": "Hệ thống kiểm tra & quản lý hội viên sân Golf (Checking Golf Member)",
+  "main": "electron/main.js",
+  "author": "Antigravity Team & Golf Admin",
+  "license": "MIT",
+  "scripts": {
+    "dev:vite": "vite",
+    "dev:electron": "wait-on tcp:5173 && electron .",
+    "dev": "concurrently -k \"npm run dev:vite\" \"npm run dev:electron\"",
+    "build:renderer": "vite build",
+    "build:win": "npm run build:renderer && electron-builder --win --x64 --ia32",
+    "build:win64": "npm run build:renderer && electron-builder --win --x64",
+    "build:win32": "npm run build:renderer && electron-builder --win --ia32"
+  },
+  "dependencies": {
+    "lucide-react": "^1.16.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.0.7",
+    "wait-on": "^8.0.2"
+  },
+  "build": {
+    "appId": "com.golfchecking.member",
+    "productName": "Golf Member Checkin",
+    "copyright": "Copyright © 2026 Golf Club",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Golf Member Checkin"
+    }
+  }
+}

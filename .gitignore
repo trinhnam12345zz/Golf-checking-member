@@ -1,5 +1,7 @@
-# Dependencies
+# Dependencies & Build outputs
 node_modules/
+dist/
+release/
 package-lock.json
 
 # Python & Environment

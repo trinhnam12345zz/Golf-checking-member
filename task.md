@@ -8,10 +8,10 @@
 ## ⛳ GIAI ĐOẠN 1: KHỞI TẠO BỘ KHUNG & GIAO DIỆN MẪU (Visual Prototype)
 *Mục tiêu: Dựng khung app Electron + React + Vite và hoàn thiện toàn bộ giao diện đẳng cấp sân golf trước khi viết logic.*
 
-- [ ] **1.1. Khởi tạo cấu trúc dự án (Scaffolding)**
-  - [ ] Khởi tạo dự án với Electron + React 18 + Vite.
-  - [ ] Cấu hình hỗ trợ Windows 10 (cả 32-bit `ia32` và 64-bit `x64`) cùng Windows 11.
-  - [ ] Cấu hình script đóng gói `electron-builder` xuất file `.exe`.
+- [x] **1.1. Khởi tạo cấu trúc dự án (Scaffolding)**
+  - [x] Khởi tạo dự án với Electron + React 18 + Vite.
+  - [x] Cấu hình hỗ trợ Windows 10 (cả 32-bit `ia32` và 64-bit `x64`) cùng Windows 11.
+  - [x] Cấu hình script đóng gói `electron-builder` xuất file `.exe`.
 - [ ] **1.2. Xây dựng Design System chuẩn Golf Club sang trọng**
   - [ ] Bộ màu nhận diện: Xanh lục bảo (Emerald Green), Vàng ánh kim (Champagne Gold), Xám than (Charcoal Dark).
   - [ ] Hiệu ứng kính mờ (Glassmorphism), bóng đổ mềm mại, phông chữ chuẩn quốc tế.
