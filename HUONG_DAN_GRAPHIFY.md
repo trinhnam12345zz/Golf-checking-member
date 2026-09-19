@@ -99,17 +99,83 @@ Nếu bạn chưa muốn code ngay mà muốn **lên kế hoạch, làm rõ nghi
 
 ---
 
-## 5. Quy trình phối hợp chuẩn trong dự án này
+## 5. Quy Trình Chi Tiết Sau Khi Lên Plan Xong (Từ Kế Hoạch Đến Sản Phẩm Hoàn Thiện)
 
-Để đạt hiệu quả cao nhất ("chuẩn Vibe Coding"):
+Sau khi tài liệu Kế hoạch (`PLAN.md`) được bạn phê duyệt, đây là **toàn bộ các bước diễn ra trên thực tế**, giải thích rõ AI làm gì, bạn làm gì và Graphify hỗ trợ ở đâu:
 
-1. **Bước 1 (Lên Plan & Duyệt ý tưởng):** Trao đổi nghiệp vụ, AI viết file Plan, chạy Graphify để duyệt bản đồ khái niệm logic.
-2. **Bước 2 (Chỉ code khi bạn đồng ý):** Sau khi Plan được duyệt, mới bắt đầu tạo các file mã nguồn từng bước một.
-3. **Bước 3 (Khóa kiến trúc bằng Graphify):** Gõ lệnh `/graphify` để cập nhật cả code lẫn tài liệu vào đồ thị.
-4. **Bước 4 (Kiểm tra & Mở rộng):**
-   - Mở `graphify-out/graph.html` để ngắm sơ đồ kiến trúc trực quan.
-   - Đọc `GRAPH_REPORT.md` xem có module nào bị thiết kế quá tải (God node) hay không.
-   - Tiếp tục lặp lại quy trình cho các tính năng tiếp theo.
+---
+
+### 🔹 Bước 1: Phân rã Plan thành danh sách Task nhỏ (Task Breakdown)
+Thay vì code một khối lớn khổng lồ dễ gây lỗi, AI sẽ chuyển đổi `PLAN.md` thành một danh sách công việc cụ thể (Todo Checklist) theo thứ tự ưu tiên:
+- `[ ] Task 1.1: Thiết kế cấu trúc dữ liệu Hội viên (Schema, các trường thông tin, phân hạng thẻ)`.
+- `[ ] Task 1.2: Viết tầng xử lý nghiệp vụ Check-in & Kiểm tra tính hợp lệ của thẻ`.
+- `[ ] Task 1.3: Thiết kế giao diện Kiosk tra cứu & tìm kiếm hội viên`.
+- `[ ] Task 1.4: Tích hợp mô phỏng / camera quét mã QR và gán tủ locker`.
+
+👉 **Hành động của bạn:** Bạn xem danh sách này, có thể yêu cầu đổi thứ tự hoặc chọn làm task nào trước theo ý bạn.
+
+---
+
+### 🔹 Bước 2: Thực thi từng module nhỏ (Incremental Execution)
+Nguyên tắc cốt lõi: **"Làm đến đâu, chắc đến đó - Tuyệt đối không làm ào ạt"**.
+- AI chỉ tập trung viết đúng code cho **1 Task** đang làm.
+- Giữ code gọn gàng, có chú thích rõ ràng, tuân thủ kiến trúc đã thống nhất trong Plan.
+- Mỗi khi viết xong file nào, AI sẽ dẫn link cụ thể (`[tên_file](file:///...)`) và giải thích ngắn gọn để bạn nắm được.
+
+👉 **Hành động của bạn:** Bạn theo dõi tiến độ từng bước, kiểm tra các tệp vừa tạo.
+
+---
+
+### 🔹 Bước 3: Tự động Kiểm thử & Báo cáo trực quan (Verification)
+Sau khi viết xong mã nguồn cho task đó, AI sẽ:
+1. **Kiểm tra cú pháp & tính toàn vẹn:** Chạy lệnh build hoặc kiểm tra lỗi.
+2. **Kiểm thử giao diện thực tế (Browser Testing):** 
+   - AI tự động khởi động server cục bộ và mở trình duyệt ảo.
+   - Thao tác thử các nút bấm (nhấp tìm kiếm, bấm nút Check-in, mở popup...).
+   - Chụp ảnh màn hình (screenshot) và đính kèm trực tiếp vào báo cáo để bạn nhìn thấy tận mắt giao diện trông như thế nào mà không cần tự thao tác.
+3. **Bạn kiểm tra thực tế:** Bạn có thể tự mở ứng dụng trên máy tính của mình để trải nghiệm thử.
+
+👉 **Hành động của bạn:** Bấm thử, trải nghiệm giao diện và phản hồi: *"Chỗ này nút bấm nhỏ quá"*, *"Cần thêm ô nhập Handicap"*... AI sẽ tinh chỉnh lại ngay.
+
+---
+
+### 🔹 Bước 4: Cập nhật Kiến trúc bằng Graphify (`/graphify --update`)
+Đây là lúc Graphify phát huy sức mạnh tối đa:
+- Sau khi một task hoàn thành, ta gõ lệnh:
+  ```text
+  /graphify --update
+  ```
+- **Graphify làm gì?**
+  - Quét các file vừa mới tạo/sửa.
+  - Cập nhật đồ thị `graph.html`. Bạn sẽ thấy module mới xuất hiện và nối dây vào các thành phần cũ trên bản đồ.
+  - Cập nhật `GRAPH_REPORT.md`: Cảnh báo ngay nếu file mới viết có dấu hiệu thiết kế sai (ví dụ: bị gọi chéo vòng tròn, hoặc gánh quá nhiều trách nhiệm).
+
+👉 **Hành động của bạn:** Bạn mở `graphify-out/graph.html` để ngắm "thành phố phần mềm" của mình đang lớn dần lên một cách ngăn nắp và khoa học.
+
+---
+
+### 🔹 Bước 5: Lưu trữ & Đồng bộ lên GitHub (Commit & Push)
+Khi một task đã hoàn thành chuẩn chỉnh và được bạn nghiệm thu:
+- AI sẽ tự động đóng gói commit với thông điệp rõ ràng theo chuẩn:
+  ```bash
+  git add .
+  git commit -m "feat: hoàn thành module tra cứu và xác thực thẻ hội viên"
+  git push origin main
+  ```
+- Toàn bộ lịch sử làm việc được đồng bộ lên kho GitHub của bạn ([github.com/trinhnam12345zz/Golf-checking-member](https://github.com/trinhnam12345zz/Golf-checking-member)), đảm bảo bạn không bao giờ bị mất code hay công sức.
+
+---
+
+### 🔹 Bước 6: Khi bạn muốn thay đổi ý tưởng giữa chừng (Change Request)?
+Trong quá trình phát triển, nếu bạn chợt nhận ra: *"Tôi muốn đổi cách tính điểm Handicap"*, hoặc *"Tôi muốn thêm chức năng đặt caddie theo yêu cầu"*:
+1. **Không sửa code bừa bãi:** Ta quay lại tệp `PLAN.md` cập nhật yêu cầu mới.
+2. **Tra cứu phạm vi ảnh hưởng bằng Graphify:**
+   ```text
+   /graphify query "Nếu sửa logic Handicap thì những module nào bị ảnh hưởng?"
+   ```
+   Graphify sẽ chỉ đích danh: *"Chỉ có file `member-service` và `checkin-card` bị ảnh hưởng, các module khác không bị tác động"*.
+3. **Sửa an toàn:** AI sửa đúng những vị trí cần thiết, không làm ảnh hưởng đến phần còn lại của hệ thống.
+4. Lặp lại chu trình: Code -> Test -> Graphify -> Git Push.
 
 ---
 
