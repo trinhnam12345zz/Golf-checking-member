@@ -1,0 +1,508 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Check-in Flow & Thermal Printing",
+      "x": 0,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_checkin_history_reporting",
+      "type": "file",
+      "file": "Check-in History & Analytics.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_model_checkin_log",
+      "type": "file",
+      "file": "Check-in Log Model (checkin_logs table).md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fingerprint_auth_module",
+      "type": "file",
+      "file": "Fingerprint Check-in Engine.md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_thermal_receipt_service",
+      "type": "file",
+      "file": "Thermal Receipt Printing Service.md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_xprinter_t80q",
+      "type": "file",
+      "file": "XPrinter XP-T80Q Thermal Printer.md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_node_thermal_printer",
+      "type": "file",
+      "file": "node-thermal-printer (ESCPOS).md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Backend Server & Environments",
+      "x": 740,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_dev_environment",
+      "type": "file",
+      "file": "Development Environment (SQLiteMock).md",
+      "x": 760,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_nodejs_api_server",
+      "type": "file",
+      "file": "Express.js Backend API Server.md",
+      "x": 960,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_golf_checkin_system",
+      "type": "file",
+      "file": "Golf Member Check-in System.md",
+      "x": 1160,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_postgresql_database",
+      "type": "file",
+      "file": "PostgreSQL Central Database.md",
+      "x": 760,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_golive_environment",
+      "type": "file",
+      "file": "Production Go-Live Environment.md",
+      "x": 960,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_windows_server",
+      "type": "file",
+      "file": "Windows Server (Server Room).md",
+      "x": 1160,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "Member Management & Validation",
+      "x": 1480,
+      "y": 0,
+      "width": 600,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_card_status_validator",
+      "type": "file",
+      "file": "Card Expiry & Anti-Sharing Validator.md",
+      "x": 1500,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_excel_import_export",
+      "type": "file",
+      "file": "ExcelCSV Migration Engine.md",
+      "x": 1700,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_model_member",
+      "type": "file",
+      "file": "Member Data Model (members table).md",
+      "x": 1500,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_member_management_module",
+      "type": "file",
+      "file": "Member Management CRUD Module.md",
+      "x": 1700,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "Hardware Integration & LAN",
+      "x": 0,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_electron_desktop_app",
+      "type": "file",
+      "file": "Electron Desktop Client (Win 1011).md",
+      "x": 20,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lan_network",
+      "type": "file",
+      "file": "Internal LAN Network (TCPIP).md",
+      "x": 220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_zkteco_k60",
+      "type": "file",
+      "file": "ZKTeco K60 Biometric Terminal.md",
+      "x": 20,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_node_zklib",
+      "type": "file",
+      "file": "node-zklib Socket Client (Port 4370).md",
+      "x": 220,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Knowledge Graph & Documentation",
+      "x": 740,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_graph_report_md",
+      "type": "file",
+      "file": "GRAPH_REPORT.md Architecture Audit.md",
+      "x": 760,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_graphify_skill",
+      "type": "file",
+      "file": "Graphify Knowledge Graph Skill.md",
+      "x": 960,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_interactive_graph_html",
+      "type": "file",
+      "file": "graph.html Interactive Visualizer.md",
+      "x": 760,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "UI Modes & Presentation",
+      "x": 1480,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "6"
+    },
+    {
+      "id": "n_kiosk_mode",
+      "type": "file",
+      "file": "Kiosk Self-Service Mode.md",
+      "x": 1500,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_react_vite_frontend",
+      "type": "file",
+      "file": "React 18 + Vite UI Frontend.md",
+      "x": 1700,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_receptionist_mode",
+      "type": "file",
+      "file": "Receptionist Counter Mode.md",
+      "x": 1500,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g6",
+      "type": "group",
+      "label": "Staff Management & Security",
+      "x": 0,
+      "y": 960,
+      "width": 600,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_staff_management_module",
+      "type": "file",
+      "file": "Staff & RBAC Management Module.md",
+      "x": 20,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_model_user",
+      "type": "file",
+      "file": "System User Model (users table).md",
+      "x": 220,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_golf_checkin_system_dev_environment",
+      "fromNode": "n_golf_checkin_system",
+      "toNode": "n_dev_environment",
+      "label": "conceptually_related_to [EXTRACTED]"
+    },
+    {
+      "id": "e_golf_checkin_system_electron_desktop_app",
+      "fromNode": "n_golf_checkin_system",
+      "toNode": "n_electron_desktop_app",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_golf_checkin_system_golive_environment",
+      "fromNode": "n_golf_checkin_system",
+      "toNode": "n_golive_environment",
+      "label": "conceptually_related_to [EXTRACTED]"
+    },
+    {
+      "id": "e_golf_checkin_system_nodejs_api_server",
+      "fromNode": "n_golf_checkin_system",
+      "toNode": "n_nodejs_api_server",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_golf_checkin_system_postgresql_database",
+      "fromNode": "n_golf_checkin_system",
+      "toNode": "n_postgresql_database",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_golf_checkin_system_graphify_skill",
+      "fromNode": "n_golf_checkin_system",
+      "toNode": "n_graphify_skill",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_windows_server_nodejs_api_server",
+      "fromNode": "n_windows_server",
+      "toNode": "n_nodejs_api_server",
+      "label": "hosts [EXTRACTED]"
+    },
+    {
+      "id": "e_windows_server_postgresql_database",
+      "fromNode": "n_windows_server",
+      "toNode": "n_postgresql_database",
+      "label": "hosts [EXTRACTED]"
+    },
+    {
+      "id": "e_postgresql_database_nodejs_api_server",
+      "fromNode": "n_postgresql_database",
+      "toNode": "n_nodejs_api_server",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e_nodejs_api_server_electron_desktop_app",
+      "fromNode": "n_nodejs_api_server",
+      "toNode": "n_electron_desktop_app",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_electron_desktop_app_lan_network",
+      "fromNode": "n_electron_desktop_app",
+      "toNode": "n_lan_network",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_electron_desktop_app_node_zklib",
+      "fromNode": "n_electron_desktop_app",
+      "toNode": "n_node_zklib",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_electron_desktop_app_react_vite_frontend",
+      "fromNode": "n_electron_desktop_app",
+      "toNode": "n_react_vite_frontend",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_react_vite_frontend_kiosk_mode",
+      "fromNode": "n_react_vite_frontend",
+      "toNode": "n_kiosk_mode",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_react_vite_frontend_receptionist_mode",
+      "fromNode": "n_react_vite_frontend",
+      "toNode": "n_receptionist_mode",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_lan_network_zkteco_k60",
+      "fromNode": "n_lan_network",
+      "toNode": "n_zkteco_k60",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_zkteco_k60_node_zklib",
+      "fromNode": "n_zkteco_k60",
+      "toNode": "n_node_zklib",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_node_zklib_fingerprint_auth_module",
+      "fromNode": "n_node_zklib",
+      "toNode": "n_fingerprint_auth_module",
+      "label": "triggers [EXTRACTED]"
+    },
+    {
+      "id": "e_xprinter_t80q_node_thermal_printer",
+      "fromNode": "n_xprinter_t80q",
+      "toNode": "n_node_thermal_printer",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_node_thermal_printer_thermal_receipt_service",
+      "fromNode": "n_node_thermal_printer",
+      "toNode": "n_thermal_receipt_service",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fingerprint_auth_module_card_status_validator",
+      "fromNode": "n_fingerprint_auth_module",
+      "toNode": "n_card_status_validator",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_fingerprint_auth_module_model_checkin_log",
+      "fromNode": "n_fingerprint_auth_module",
+      "toNode": "n_model_checkin_log",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e_fingerprint_auth_module_thermal_receipt_service",
+      "fromNode": "n_fingerprint_auth_module",
+      "toNode": "n_thermal_receipt_service",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_member_management_module_excel_import_export",
+      "fromNode": "n_member_management_module",
+      "toNode": "n_excel_import_export",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_member_management_module_model_member",
+      "fromNode": "n_member_management_module",
+      "toNode": "n_model_member",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e_card_status_validator_model_member",
+      "fromNode": "n_card_status_validator",
+      "toNode": "n_model_member",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_staff_management_module_model_user",
+      "fromNode": "n_staff_management_module",
+      "toNode": "n_model_user",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e_checkin_history_reporting_model_checkin_log",
+      "fromNode": "n_checkin_history_reporting",
+      "toNode": "n_model_checkin_log",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify_skill_graph_report_md",
+      "fromNode": "n_graphify_skill",
+      "toNode": "n_graph_report_md",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_graphify_skill_interactive_graph_html",
+      "fromNode": "n_graphify_skill",
+      "toNode": "n_interactive_graph_html",
+      "label": "implements [EXTRACTED]"
+    }
+  ]
+}
