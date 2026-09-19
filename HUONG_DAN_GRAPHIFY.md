@@ -74,17 +74,42 @@ Nhờ đã cài đặt **Agent Skill**, bạn không cần gõ các lệnh termi
 
 ---
 
-## 4. Quy trình phối hợp chuẩn trong dự án này
+---
+
+## 4. Giai đoạn Lên Kế Hoạch (Planning First - Khi chưa cần viết code)
+
+Nếu bạn chưa muốn code ngay mà muốn **lên kế hoạch, làm rõ nghiệp vụ và cấu trúc trước**, quy trình sẽ diễn ra như sau:
+
+### 4.1. Cách bạn và AI cùng lên Plan:
+1. **Bạn chia sẻ ý tưởng hoặc gõ lệnh `/grill-me`:**
+   - **Tự do:** Bạn chỉ cần nói ý tưởng thô (ví dụ: *"Tôi muốn làm app check-in cho lễ tân sân golf, có quét mã QR và phân hạng thẻ"*).
+   - **Phỏng vấn bóc tách (`/grill-me`):** AI sẽ đóng vai trò Solution Architect phỏng vấn bạn từng câu hỏi ngắn để làm rõ:
+     - Ai là người dùng chính (Lễ tân, Golfer, hay Quản lý sân)?
+     - Luồng nghiệp vụ diễn ra như thế nào từ lúc golfer đến cổng?
+     - Dữ liệu cần quản lý gồm những gì?
+2. **AI lập tài liệu Kế hoạch chi tiết (`PLAN.md`):**
+   - Tài liệu hóa toàn bộ: Mục tiêu, Kiến trúc dự kiến, Phân rã tính năng theo giai đoạn (Phase 1, 2, 3), và Dự kiến rủi ro.
+3. **Graphify vẽ bản đồ Khái niệm Nghiệp vụ (Concept Graph):**
+   - **Điểm đặc biệt:** Graphify không chỉ đọc code mà còn đọc **tài liệu Markdown (`.md`), sơ đồ và ảnh**.
+   - Ngay cả khi **chưa có 1 dòng code nào**, khi chúng ta viết xong tài liệu kế hoạch và chạy `/graphify`, Graphify sẽ trích xuất toàn bộ các thực thể nghiệp vụ:
+     `[Hội viên]` ──(sở hữu)──► `[Hạng thẻ VIP]` ──(quy định)──► `[Số lượt chơi / Hạn mức]`
+     `[Golfer]` ──(check-in)──► `[Locker / Tủ đồ]` ──(gán)──► `[Caddie phục vụ]`
+   - Bạn mở `graphify-out/graph.html` để ngắm **bản đồ nghiệp vụ logic**, xem có thiếu sót mắt xích nào trước khi bắt tay vào code!
+4. **Chốt duyệt:** Bạn xem xét, yêu cầu sửa đổi cho đến khi ưng ý 100% thì mới chuyển sang giai đoạn code.
+
+---
+
+## 5. Quy trình phối hợp chuẩn trong dự án này
 
 Để đạt hiệu quả cao nhất ("chuẩn Vibe Coding"):
 
-1. **Bước 1 (Lên ý tưởng & yêu cầu):** Bạn đưa ra yêu cầu (ví dụ: *"Tôi muốn làm màn hình quét thẻ RFID và bảng quản lý Caddie"*).
-2. **Bước 2 (Xây dựng code):** Tôi và bạn cùng viết code các file tính năng.
-3. **Bước 3 (Khóa kiến trúc bằng Graphify):** Gõ lệnh `/graphify`.
-4. **Bước 4 (Kiểm tra):**
+1. **Bước 1 (Lên Plan & Duyệt ý tưởng):** Trao đổi nghiệp vụ, AI viết file Plan, chạy Graphify để duyệt bản đồ khái niệm logic.
+2. **Bước 2 (Chỉ code khi bạn đồng ý):** Sau khi Plan được duyệt, mới bắt đầu tạo các file mã nguồn từng bước một.
+3. **Bước 3 (Khóa kiến trúc bằng Graphify):** Gõ lệnh `/graphify` để cập nhật cả code lẫn tài liệu vào đồ thị.
+4. **Bước 4 (Kiểm tra & Mở rộng):**
    - Mở `graphify-out/graph.html` để ngắm sơ đồ kiến trúc trực quan.
    - Đọc `GRAPH_REPORT.md` xem có module nào bị thiết kế quá tải (God node) hay không.
-5. **Bước 5 (Mở rộng tính năng tiếp theo):** Tiếp tục lặp lại quy trình mà không sợ code mới làm hỏng code cũ.
+   - Tiếp tục lặp lại quy trình cho các tính năng tiếp theo.
 
 ---
 
