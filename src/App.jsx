@@ -72,7 +72,7 @@ export default function App() {
               Royal Palm Golf Club
             </h1>
             <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-              Hệ thống Xác thực Hội viên & In Phiếu Tự Động
+              Automated Member Authentication & Thermal Bill Printing
             </p>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function App() {
               }}
             >
               <Monitor size={16} />
-              Chế độ Kiosk (Golfer)
+              Kiosk Mode (Golfer)
             </button>
             <button
               onClick={() => setActiveTab('receptionist')}
@@ -129,7 +129,7 @@ export default function App() {
               }}
             >
               <UserCheck size={16} />
-              Quầy Lễ Tân
+              Reception Counter
             </button>
           </div>
 
@@ -147,7 +147,7 @@ export default function App() {
             border: '1px solid rgba(255,255,255,0.08)'
           }}>
             <Clock size={16} color="#fbbf24" />
-            <span>{currentTime.toLocaleTimeString('vi-VN')}</span>
+            <span>{currentTime.toLocaleTimeString('en-US')}</span>
           </div>
         </div>
       </header>
@@ -174,14 +174,14 @@ export default function App() {
                 fontWeight: 700,
                 letterSpacing: '0.5px'
               }}>
-                GIAI ĐOẠN 1.1 HOÀN TẤT
+                PHASE 1.1 COMPLETED
               </span>
               <span style={{ color: 'var(--text-muted)', fontSize: '13px' }}>
-                Hệ điều hành tương thích: <strong>Windows 10 (32-bit / 64-bit) & Windows 11</strong>
+                Compatible OS: <strong>Windows 10 (32-bit / 64-bit) & Windows 11</strong>
               </span>
             </div>
             <h2 style={{ fontSize: '22px', fontWeight: 700, fontFamily: 'var(--font-display)' }}>
-              Bộ Khung Dự Án Electron + React 18 + Vite Đã Sẵn Sàng
+              Desktop Scaffolding Ready (Electron + React 18 + Vite)
             </h2>
           </div>
 
@@ -239,10 +239,10 @@ export default function App() {
             <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700 }}>
-                  Nhật Ký Check-in Trực Tiếp (Ca Hôm Nay)
+                  Live Check-in Activity (Today's Shift)
                 </h3>
                 <span style={{ fontSize: '12px', color: 'var(--primary-400)', fontWeight: 600 }}>
-                  🟢 Tự động đồng bộ
+                  🟢 Live Sync Active
                 </span>
               </div>
 
@@ -271,8 +271,8 @@ export default function App() {
                     VIP
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '15px', fontWeight: 600 }}>Nguyễn Văn Minh</h4>
-                    <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Mã thẻ: <strong>GLF-8899</strong> • Hạng: VIP Diamond</p>
+                    <h4 style={{ fontSize: '15px', fontWeight: 600 }}>Nguyen Van Minh</h4>
+                    <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Card ID: <strong>GLF-8899</strong> • Tier: VIP Diamond</p>
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
@@ -285,9 +285,9 @@ export default function App() {
                     fontSize: '12px',
                     fontWeight: 600
                   }}>
-                    Check-in Hợp Lệ
+                    Check-in Valid
                   </span>
-                  <p style={{ fontSize: '11px', color: 'var(--text-dim)', marginTop: '4px' }}>Hôm nay 08:32 AM • Quầy #1</p>
+                  <p style={{ fontSize: '11px', color: 'var(--text-dim)', marginTop: '4px' }}>Today 08:32 AM • Counter #1</p>
                 </div>
               </div>
 
@@ -313,8 +313,8 @@ export default function App() {
                     <AlertCircle size={24} color="#ef4444" />
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '15px', fontWeight: 600 }}>Trần Quốc Toản</h4>
-                    <p style={{ fontSize: '12px', color: 'var(--danger)' }}>⚠️ Thẻ đã hết hạn từ 10/09/2026 - ĐÃ CHẶN CHECK-IN</p>
+                    <h4 style={{ fontSize: '15px', fontWeight: 600 }}>Tran Quoc Toan</h4>
+                    <p style={{ fontSize: '12px', color: 'var(--danger)' }}>⚠️ Membership expired on 10/09/2026 - CHECK-IN BLOCKED</p>
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
@@ -327,9 +327,9 @@ export default function App() {
                     fontSize: '12px',
                     fontWeight: 600
                   }}>
-                    Từ chối in bill
+                    Printing Denied
                   </span>
-                  <p style={{ fontSize: '11px', color: 'var(--text-dim)', marginTop: '4px' }}>Hôm nay 09:15 AM • Quầy #1</p>
+                  <p style={{ fontSize: '11px', color: 'var(--text-dim)', marginTop: '4px' }}>Today 09:15 AM • Counter #1</p>
                 </div>
               </div>
             </div>
@@ -338,23 +338,23 @@ export default function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div className="glass-panel" style={{ padding: '20px' }}>
                 <h4 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '12px' }}>
-                  Thống Kê Nhanh Hôm Nay
+                  Today's Quick Summary
                 </h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   <div style={{ background: 'rgba(0,0,0,0.25)', padding: '12px', borderRadius: '8px' }}>
                     <span style={{ fontSize: '24px', fontWeight: 700, color: 'var(--primary-400)' }}>42</span>
-                    <p style={{ fontSize: '11px', color: 'var(--text-dim)' }}>Lượt đã check-in</p>
+                    <p style={{ fontSize: '11px', color: 'var(--text-dim)' }}>Total Check-ins</p>
                   </div>
                   <div style={{ background: 'rgba(0,0,0,0.25)', padding: '12px', borderRadius: '8px' }}>
                     <span style={{ fontSize: '24px', fontWeight: 700, color: 'var(--gold-400)' }}>18</span>
-                    <p style={{ fontSize: '11px', color: 'var(--text-dim)' }}>Hội viên VIP</p>
+                    <p style={{ fontSize: '11px', color: 'var(--text-dim)' }}>VIP Members</p>
                   </div>
                 </div>
               </div>
 
               <div className="glass-panel" style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <h4 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-muted)' }}>
-                  Thao Tác Nhanh
+                  Quick Actions
                 </h4>
                 <button style={{
                   padding: '12px',
@@ -369,7 +369,7 @@ export default function App() {
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <Users size={16} /> Quản lý danh sách hội viên
+                  <Users size={16} /> Manage Member Directory
                 </button>
                 <button style={{
                   padding: '12px',
@@ -384,7 +384,7 @@ export default function App() {
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <FileText size={16} /> Nhập danh sách từ Excel
+                  <FileText size={16} /> Import from Excel / CSV
                 </button>
                 <button style={{
                   padding: '12px',
@@ -399,7 +399,7 @@ export default function App() {
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <Printer size={16} /> Kiểm tra máy in XPrinter (Test)
+                  <Printer size={16} /> Test XPrinter Output (Sample Bill)
                 </button>
               </div>
             </div>
@@ -416,8 +416,8 @@ export default function App() {
         fontSize: '11px',
         color: 'var(--text-dim)'
       }}>
-        <span>Checking Golf Member v1.0.0 • Chạy trên Electron {sysInfo.electron} ({sysInfo.arch})</span>
-        <span>Sẵn sàng cho cả Windows 10 (32-bit/64-bit) & Windows 11</span>
+        <span>Checking Golf Member v1.0.0 • Running on Electron {sysInfo.electron} ({sysInfo.arch})</span>
+        <span>Production Ready for Windows 10 (32-bit/64-bit) & Windows 11</span>
       </footer>
     </div>
   );

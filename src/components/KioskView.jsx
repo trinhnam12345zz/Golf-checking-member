@@ -88,7 +88,7 @@ export default function KioskView() {
               color: 'var(--gold-400)',
               fontWeight: 700
             }}>
-              Chào Mừng Đến Với Royal Palm Golf Club
+              WELCOME TO ROYAL PALM GOLF CLUB
             </span>
           </div>
           <h2 style={{
@@ -97,7 +97,7 @@ export default function KioskView() {
             fontWeight: 800,
             lineHeight: 1.2
           }}>
-            Khu Vực Check-in <span className="gold-gradient-text">Tự Động Hội Viên</span>
+            Self-Service <span className="gold-gradient-text">Member Check-in</span>
           </h2>
         </div>
 
@@ -114,7 +114,7 @@ export default function KioskView() {
             <Sun size={20} color="#fbbf24" />
             <div>
               <p style={{ fontSize: '13px', fontWeight: 700 }}>26°C</p>
-              <p style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Nắng nhẹ</p>
+              <p style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Light Sun</p>
             </div>
           </div>
           <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.1)' }} />
@@ -122,15 +122,15 @@ export default function KioskView() {
             <Wind size={20} color="#38bdf8" />
             <div>
               <p style={{ fontSize: '13px', fontWeight: 700 }}>8 km/h</p>
-              <p style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Gió mát</p>
+              <p style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Gentle Breeze</p>
             </div>
           </div>
           <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.1)' }} />
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Flag size={20} color="#34d399" />
             <div>
-              <p style={{ fontSize: '13px', fontWeight: 700, color: 'var(--primary-400)' }}>18 Lỗ</p>
-              <p style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Sân mở cửa</p>
+              <p style={{ fontSize: '13px', fontWeight: 700, color: 'var(--primary-400)' }}>18 Holes</p>
+              <p style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Course Open</p>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function KioskView() {
         <div 
           id="fingerprint-sensor-pad"
           onClick={() => triggerScan('success')}
-          title="Chạm vào đây để quét thử"
+          title="Click to test biometric scan"
           style={{
             position: 'relative',
             width: '160px',
@@ -232,22 +232,22 @@ export default function KioskView() {
           letterSpacing: '0.5px'
         }}>
           {scanning ? (
-            <span className="gold-gradient-text">Đang đối chiếu dữ liệu sinh trắc học...</span>
+            <span className="gold-gradient-text">Verifying Biometric Credentials...</span>
           ) : (
-            <span>Xin vui lòng đặt ngón tay lên máy quét</span>
+            <span>Please Place Your Finger on the Scanner</span>
           )}
         </h3>
 
         <p style={{
           fontSize: '14px',
           color: 'var(--text-muted)',
-          maxWidth: '480px',
+          maxWidth: '500px',
           textAlign: 'center',
           lineHeight: 1.5
         }}>
           {scanning 
-            ? "Vui lòng giữ nguyên ngón tay trên đầu đọc ZKTeco K60 trong giây lát." 
-            : "Chạm nhẹ ngón tay đã đăng ký vào máy chấm công tại bàn. Hệ thống sẽ tự động xác thực và in phiếu ra sân."}
+            ? "Please hold your finger firmly on the ZKTeco K60 scanner." 
+            : "Touch your registered finger on the ZKTeco K60 biometric terminal. Your check-in confirmation bill will be printed automatically."}
         </p>
 
         <div style={{
@@ -262,13 +262,13 @@ export default function KioskView() {
           fontSize: '11px',
           color: 'var(--text-dim)'
         }}>
-          <span>Cảm biến: <strong>ZKTeco K60 Optical</strong></span>
+          <span>Biometrics: <strong>ZKTeco K60 Optical</strong></span>
           <span>•</span>
-          <span>Tốc độ nhận diện: <strong>&lt; 0.5s</strong></span>
+          <span>Authentication Speed: <strong>&lt; 0.5s</strong></span>
         </div>
       </div>
 
-      {/* Bottom Interactive Simulation Bar (Cho người dùng bấm thử ngay) */}
+      {/* Bottom Interactive Simulation Bar (For quick testing) */}
       <div style={{
         marginTop: '16px',
         padding: '12px 20px',
@@ -283,10 +283,10 @@ export default function KioskView() {
           <Sparkles size={16} color="#fbbf24" />
           <div>
             <p style={{ fontSize: '12px', fontWeight: 600, color: 'var(--gold-400)' }}>
-              Bảng Thử Nghiệm Tương Tác (Vibe Simulator)
+              Interactive Vibe Simulator
             </p>
             <p style={{ fontSize: '11px', color: 'var(--text-dim)' }}>
-              Bấm thử các tình huống giả lập từ máy K60:
+              Simulate real biometric check-in events from the ZKTeco K60:
             </p>
           </div>
         </div>
@@ -313,7 +313,7 @@ export default function KioskView() {
             }}
           >
             <CheckCircle2 size={14} color="#34d399" />
-            1. Quét VIP Hợp Lệ
+            1. Scan Valid VIP
           </button>
 
           <button
@@ -337,7 +337,7 @@ export default function KioskView() {
             }}
           >
             <XCircle size={14} color="#ef4444" />
-            2. Thẻ Đã Hết Hạn
+            2. Scan Expired Card
           </button>
 
           <button
@@ -361,13 +361,13 @@ export default function KioskView() {
             }}
           >
             <AlertTriangle size={14} color="#fbbf24" />
-            3. Chưa Có Vân Tay
+            3. Unregistered Finger
           </button>
         </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* MODAL KẾT QUẢ CHECK-IN (POPUP TOÀN MÀN HÌNH HOẶC OVERLAY CAO CẤP)        */}
+      {/* CHECK-IN RESULT MODAL (OVERLAY POPUP IN ENGLISH)                           */}
       {/* ========================================================================= */}
       {activeModal && (
         <div style={{
@@ -404,7 +404,7 @@ export default function KioskView() {
                 alignItems: 'center',
                 gap: '4px'
               }}>
-                <Clock size={14} /> Tự đóng sau {countdown}s
+                <Clock size={14} /> Auto-close in {countdown}s
               </div>
 
               {/* Avatar with Gold Crest Ring */}
@@ -457,10 +457,10 @@ export default function KioskView() {
                 color: '#ffffff',
                 marginBottom: '4px'
               }}>
-                ÔNG NGUYỄN VĂN MINH
+                MR. NGUYEN VAN MINH
               </h2>
               <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '24px' }}>
-                Mã Thẻ: <strong style={{ color: '#fbbf24' }}>GLF-8899</strong> • SĐT: <strong>0903.***.888</strong>
+                Member ID: <strong style={{ color: '#fbbf24' }}>GLF-8899</strong> • Phone: <strong>0903.***.888</strong>
               </p>
 
               {/* Status Box */}
@@ -476,11 +476,11 @@ export default function KioskView() {
                 marginBottom: '24px'
               }}>
                 <div>
-                  <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Thời hạn thẻ:</p>
-                  <p style={{ fontSize: '14px', fontWeight: 600, color: '#34d399' }}>Đến 31/12/2026</p>
+                  <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Membership Valid Until:</p>
+                  <p style={{ fontSize: '14px', fontWeight: 600, color: '#34d399' }}>31/12/2026</p>
                 </div>
                 <div>
-                  <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Tủ đồ chỉ định (Locker):</p>
+                  <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Assigned Locker:</p>
                   <p style={{ fontSize: '14px', fontWeight: 700, color: '#fbbf24' }}>Locker #108 (VIP A)</p>
                 </div>
               </div>
@@ -499,7 +499,7 @@ export default function KioskView() {
                 fontWeight: 600
               }}>
                 <Printer size={18} color="#34d399" />
-                <span>Đã in phiếu check-in tự động tại Quầy Lễ Tân #1</span>
+                <span>Confirmation receipt printed automatically at Reception Counter #1</span>
               </div>
 
               <button
@@ -518,7 +518,7 @@ export default function KioskView() {
                   boxShadow: '0 4px 14px rgba(5, 150, 105, 0.4)'
                 }}
               >
-                Hoàn Tất (Đóng)
+                Done (Close)
               </button>
             </div>
           )}
@@ -558,7 +558,7 @@ export default function KioskView() {
                 fontWeight: 700,
                 letterSpacing: '1px'
               }}>
-                CHẶN CHECK-IN • THẺ HẾT HẠN
+                CHECK-IN BLOCKED • CARD EXPIRED
               </span>
 
               <h3 style={{
@@ -569,10 +569,10 @@ export default function KioskView() {
                 marginTop: '16px',
                 marginBottom: '8px'
               }}>
-                ÔNG TRẦN QUỐC TOẢN
+                MR. TRAN QUOC TOAN
               </h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '13px', marginBottom: '20px' }}>
-                Mã thẻ: <strong>GLF-4412</strong> • Hạng thẻ: Gold Member
+                Member ID: <strong>GLF-4412</strong> • Tier: Gold Member
               </p>
 
               <div style={{
@@ -586,11 +586,11 @@ export default function KioskView() {
                 lineHeight: 1.6,
                 marginBottom: '24px'
               }}>
-                ⚠️ Thẻ hội viên này đã hết hạn hiệu lực từ ngày <strong>10/09/2026</strong>. Hệ thống từ chối in phiếu check-in và đã phát tín hiệu cảnh báo đến bàn Lễ tân.
+                ⚠️ This membership card expired on <strong>10/09/2026</strong>. Check-in slip generation has been denied and an alert has been dispatched to the reception counter.
               </div>
 
               <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '24px' }}>
-                Xin vui lòng liên hệ nhân viên tại <strong>Quầy Lễ Tân</strong> để thực hiện thủ tục gia hạn thẻ trước khi ra sân.
+                Please proceed to the <strong>Reception Counter</strong> to renew your membership prior to tee-off.
               </p>
 
               <button
@@ -607,7 +607,7 @@ export default function KioskView() {
                   cursor: 'pointer'
                 }}
               >
-                Đã Hiểu (Đóng)
+                Understood (Close)
               </button>
             </div>
           )}
@@ -643,11 +643,11 @@ export default function KioskView() {
                 color: '#ffffff',
                 marginBottom: '12px'
               }}>
-                Chưa Nhận Diện Được Vân Tay
+                Fingerprint Not Registered
               </h3>
 
               <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.6, marginBottom: '24px' }}>
-                Dấu vân tay này chưa được đăng ký trong hệ thống hoặc bạn là hội viên mới từ hệ thống cũ chuyển sang.
+                This fingerprint does not match any record, or your profile was recently imported from the legacy database.
               </p>
 
               <div style={{
@@ -660,11 +660,11 @@ export default function KioskView() {
                 color: '#fef3c7',
                 marginBottom: '24px'
               }}>
-                <strong>Quy trình đăng ký vân tay mới (chỉ 30 giây):</strong>
+                <strong>Biometric Enrollment Guide (Takes only 30s):</strong>
                 <ol style={{ paddingLeft: '20px', marginTop: '8px', lineHeight: 1.6 }}>
-                  <li>Bước tới Quầy Lễ Tân và xuất trình Mã thẻ hoặc CCCD.</li>
-                  <li>Nhân viên sẽ bấm lệnh kích hoạt trên máy ZKTeco K60.</li>
-                  <li>Đặt ngón tay 3 lần để hoàn tất lấy mẫu sinh trắc học.</li>
+                  <li>Step up to the Reception Counter and present your Member Card or Phone.</li>
+                  <li>The receptionist will prompt the ZKTeco K60 biometric sensor.</li>
+                  <li>Scan your finger 3 times to store your high-security template.</li>
                 </ol>
               </div>
 
@@ -682,7 +682,7 @@ export default function KioskView() {
                   cursor: 'pointer'
                 }}
               >
-                Đã Hiểu (Đóng)
+                Understood (Close)
               </button>
             </div>
           )}
