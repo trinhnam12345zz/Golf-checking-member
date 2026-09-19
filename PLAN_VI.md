@@ -29,24 +29,27 @@ Trình duyệt web thông thường (Chrome, Edge...) **KHÔNG THỂ** truy cậ
 
 | Tầng | Công nghệ | Vai trò |
 | :--- | :--- | :--- |
-| **Giao diện** | React 18 + Vite | Các màn hình ứng dụng (check-in, quản lý hội viên, báo cáo), hỗ trợ 2 chế độ (Kiosk / Lễ tân) |
-| **Vỏ ứng dụng** | Electron 30+ | Đóng gói thành file `.exe` cài trên Windows, truy cập USB |
+| **Giao diện** | React 18 + Vite | Các màn hình ứng dụng (check-in, quản lý hội viên, báo cáo), hỗ trợ 2 chế độ (Kiosk / Lễ tân). Chạy mượt trên Windows 10 (32-bit/64-bit), Win 11 |
+| **Vỏ ứng dụng** | Electron (hỗ trợ Win 10 32-bit & 64-bit) | Đóng gói thành file `.exe` cài trên Windows, kết nối phần cứng máy in và mạng LAN |
 | **Máy chủ API** | Express.js (Node.js) | Xử lý logic nghiệp vụ: đăng ký hội viên, xác thực vân tay, ghi nhật ký check-in, xuất báo cáo. Chạy trên máy chủ trong phòng server |
-| **Cơ sở dữ liệu** | PostgreSQL | Lưu trữ toàn bộ dữ liệu hội viên, mẫu vân tay, lịch sử check-in. Đặt trên máy chủ phòng server |
-| **Quét vân tay** | SDK của DigitalPersona / SecuGen | Thu nhận, đăng ký và đối chiếu vân tay |
-| **In bill** | Thư viện `node-thermal-printer` hoặc `escpos` | Định dạng và gửi lệnh in đến máy in nhiệt Epson TM-T82 hoặc tương đương |
+| **Cơ sở dữ liệu** | PostgreSQL | Lưu trữ toàn bộ dữ liệu hội viên, mã vân tay, lịch sử check-in. Đặt trên máy chủ phòng server |
+| **Xác thực vân tay** | Máy chấm công **ZKTeco K60** | Kết nối mạng LAN nội bộ (TCP/IP port 4370) qua thư viện `node-zklib`, lắng nghe sự kiện check-in vân tay theo thời gian thực (Real-time events) |
+| **In bill** | Máy in nhiệt **XPrinter XP-T80Q** | Khổ giấy K80 (80mm), tự động cắt giấy, in nhanh qua chuẩn ESC/POS cổng USB / LAN bằng thư viện `node-thermal-printer` |
 
-### 2.3. Tư vấn thiết bị: Máy quét vân tay
+### 2.3. Thiết bị phần cứng đã chốt cho dự án
 
-Bạn chưa có máy quét vân tay. Dưới đây là 3 lựa chọn phổ biến:
+1. **Máy nhận diện vân tay: ZKTeco K60**
+   - **Loại thiết bị:** Máy chấm công & kiểm soát vân tay độc lập (có màn hình màu, loa giọng nói "Xin cảm ơn", pin lưu điện).
+   - **Phương thức kết nối:** Cáp mạng LAN (RJ45), kết nối qua socket TCP/IP (port 4370).
+   - **Cơ chế hoạt động:**
+     - Khi hội viên quét vân tay trên K60, máy xác thực và bắn tín hiệu sự kiện (Real-time Event Log) ngay lập tức tới App trên PC qua mạng LAN.
+     - App đối chiếu mã hội viên (`enrollNumber`), hiển thị thông tin và cảnh báo nếu thẻ hết hạn.
+   - **Đăng ký vân tay mới:** Có thể đăng ký trực tiếp trên máy K60 hoặc đồng bộ từ App thông qua giao thức ZKLib.
 
-| Thiết bị | Giá (VNĐ) | Hỗ trợ SDK | Ưu điểm |
-| :--- | :--- | :--- | :--- |
-| **✅ DigitalPersona U.are.U 4500** (Khuyên dùng) | ~2 - 3 triệu | Windows SDK + Node.js wrapper | Chuẩn công nghiệp, độ chính xác cao, dùng phổ biến trong ngân hàng và doanh nghiệp Việt Nam |
-| SecuGen Hamster Pro 20 | ~1.5 - 2.5 triệu | Windows SDK + Node bindings | Chính xác tốt, nhỏ gọn, giá phải chăng |
-| ZKTeco ZK4500 | ~1.2 - 1.8 triệu | Windows SDK | Rẻ nhất, đủ dùng cho nhu cầu cơ bản |
-
-> 💡 **Khuyến nghị:** Nên chọn **DigitalPersona U.are.U 4500** vì SDK trưởng thành nhất, cộng đồng hỗ trợ đông nhất, và được dùng rộng rãi trong hệ thống sinh trắc học doanh nghiệp tại Việt Nam. Chỉ cần cắm USB vào PC là ứng dụng nhận diện tự động.
+2. **Máy in bill: XPrinter XP-T80Q**
+   - **Loại thiết bị:** Máy in hóa đơn nhiệt khổ K80 (80mm), có dao cắt giấy tự động.
+   - **Phương thức kết nối:** Cáp USB cắm trực tiếp vào PC quầy lễ tân (hoặc cổng mạng LAN).
+   - **Giao thức:** Chuẩn công nghiệp ESC/POS — in siêu tốc (< 1 giây/bill), không cần mực in, giấy nhiệt K80 dễ mua trên toàn quốc.
 
 ---
 
@@ -60,34 +63,42 @@ Công ty đã có **phòng server chạy Windows Server**. Toàn bộ cơ sở d
 │   Máy chủ Windows Server                 │
 │   ┌────────────────────────────────┐     │
 │   │  PostgreSQL Database           │     │  ← Toàn bộ dữ liệu hội viên
-│   │  (hội viên, vân tay, nhật ký)  │     │     + mẫu vân tay + lịch sử
-│   ├────────────────────────────────┤     │     check-in lưu TẬP TRUNG
-│   │  Node.js API Server           │     │     tại đây
+│   │  (hội viên, mã thẻ, nhật ký)   │     │     + lịch sử check-in lưu
+│   ├────────────────────────────────┤     │     TẬP TRUNG tại đây
+│   │  Node.js API Server           │     │
 │   │  (xử lý logic nghiệp vụ)     │     │
 │   └──────────────┬─────────────────┘     │
 │                  │                       │
 └──────────────────┼───────────────────────┘
-                   │ Mạng LAN nội bộ
-        ┌──────────┼──────────┐
-        │          │          │
-   ┌────▼────┐ ┌───▼────┐ ┌───▼────┐
-   │  PC #1  │ │ PC #2  │ │ PC #3  │
-   │ Quầy 1  │ │ Quầy 2 │ │Quản lý │
-   │         │ │        │ │        │
-   │ App     │ │ App    │ │ App    │
-   │Electron │ │Electron│ │Electron│
-   │         │ │        │ │        │
-   │[Vân tay]│ │[Vân tay│ │        │
-   │[Máy in] │ │[Máy in]│ │        │
-   └─────────┘ └────────┘ └────────┘
+                   │ Mạng LAN nội bộ (TCP/IP)
+        ┌──────────┼───────────────┬─────────────────┐
+        │          │               │                 │
+   ┌────▼────┐ ┌───▼────┐    ┌─────▼─────┐     ┌─────▼─────┐
+   │  PC #1  │ │ PC #2  │    │ Máy K60 #1│     │ Máy K60 #2│
+   │ Quầy 1  │ │ Quầy 2 │    │(Quầy 1/Cửa│     │(Quầy 2)   │
+   │         │ │        │    │           │     │           │
+   │ App     │ │ App    │    │[Quét      │     │[Quét      │
+   │Electron │ │Electron│    │ vân tay]  │     │ vân tay]  │
+   │    │    │ │    │   │    └───────────┘     └───────────┘
+   │[Máy in  │ │[Máy in │
+   │XPrinter]│ │XPrinter│
+   │ (USB)   │ │ (USB)  │
+   └─────────┘ └────────┘
 ```
 
 ### Cách hoạt động:
-- **Máy chủ (Phòng server):** Chạy PostgreSQL + Node.js API 24/7. Lưu trữ toàn bộ dữ liệu. Bộ phận IT quản lý sao lưu định kỳ.
-- **Các PC quầy lễ tân:** Chỉ chạy ứng dụng Electron (giao diện). Kết nối vào máy chủ qua mạng LAN để đọc/ghi dữ liệu. Mỗi PC gắn máy quét vân tay USB và máy in nhiệt riêng.
-- **PC Quản lý:** Cùng ứng dụng Electron nhưng đăng nhập bằng tài khoản Admin. Không cần phần cứng — dùng để quản lý hội viên, xem báo cáo, xuất dữ liệu.
+- **Máy chủ (Phòng server):** Chạy PostgreSQL + Node.js API 24/7. Lưu trữ toàn bộ dữ liệu hội viên và lịch sử check-in. Bộ phận IT quản lý sao lưu định kỳ.
+- **Máy chấm công ZKTeco K60:** Cắm dây mạng LAN vào hệ thống (đặt IP tĩnh). Khi hội viên đặt ngón tay lên quét, máy xác thực thành công và bắn tín hiệu sự kiện (Real-time Event) kèm mã hội viên qua cổng TCP 4370.
+- **Các PC quầy lễ tân:** Chạy ứng dụng Electron (hỗ trợ Windows 10 32-bit & 64-bit, Win 11). Ứng dụng lắng nghe sự kiện từ K60:
+  1. Khi nhận tín hiệu check-in từ K60 → App tự động đối chiếu thông tin hội viên trên Server.
+  2. Hiển thị thông tin hội viên (ảnh, họ tên, hạng thẻ, hạn sử dụng, thông báo cảnh báo nếu hết hạn).
+  3. Tự động gửi lệnh in bill xác nhận đến máy in nhiệt **XPrinter XP-T80Q** (kết nối qua cổng USB của PC).
+- **PC Quản lý:** Cùng ứng dụng nhưng đăng nhập tài khoản Admin — dùng để quản lý hội viên, quản lý tài khoản nhân viên, xem báo cáo, xuất dữ liệu Excel.
 
-> 💡 **Lợi ích:** Nếu PC quầy lễ tân bị hỏng, chỉ cần thay máy mới và cài app — toàn bộ dữ liệu an toàn trên server. Bộ phận IT cũng có thể lên lịch sao lưu tự động cho PostgreSQL.
+> 💡 **Lợi ích:** 
+> - Tận dụng tối đa máy chấm công **ZKTeco K60** có sẵn, có loa thông báo và pin dự phòng.
+> - Máy in **XPrinter XP-T80Q** in bill siêu nhanh qua USB, tự động cắt giấy gọn gàng.
+> - Hỗ trợ đầy đủ các máy tính quầy lễ tân chạy **Windows 10 32-bit hoặc 64-bit**.
 
 ---
 

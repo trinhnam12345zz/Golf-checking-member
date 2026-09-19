@@ -24,32 +24,32 @@
 
 | Layer | Technology | Role |
 | :--- | :--- | :--- |
-| **Frontend** | React 18 + Vite | UI components, dual mode (Kiosk / Receptionist) |
-| **Desktop Shell** | Electron 30+ | Windows app wrapper, USB device access, printer access |
-| **Backend API** | Express.js (inside Electron) | REST API for member CRUD, check-in logic, reports |
-| **Database** | PostgreSQL (on company server) | Member data, fingerprint templates, check-in history |
-| **Fingerprint SDK** | DigitalPersona / SecuGen Node.js SDK | Capture, enroll, and verify fingerprints |
-| **Thermal Printing** | `node-thermal-printer` or `escpos` library | Format and send bill to Epson TM-T82 compatible printers |
+| **Frontend** | React 18 + Vite | UI components, dual mode (Kiosk / Receptionist), runs on Win 10 (32/64-bit) & Win 11 |
+| **Desktop Shell** | Electron (ia32 & x64) | Windows app wrapper, hardware & LAN network integration |
+| **Backend API** | Express.js (Node.js) | REST API for member CRUD, check-in logic, reports on Windows Server |
+| **Database** | PostgreSQL (on company server) | Member data, check-in history, centralized storage |
+| **Biometric Auth** | **ZKTeco K60** | Standalone fingerprint terminal over LAN (TCP/IP port 4370) via `node-zklib` realtime event listener |
+| **Thermal Printing** | **XPrinter XP-T80Q** | 80mm thermal receipt printer with auto-cutter via USB (ESC/POS) using `node-thermal-printer` |
 
 > [!IMPORTANT]
-> **Why not a web app?** A regular web browser **cannot** access USB fingerprint scanners or thermal printers directly. Electron solves this by providing Node.js-level hardware access while keeping the UI as a modern web interface.
+> **Why not a pure web browser app?** Standard web browsers cannot access USB receipt printers or establish raw TCP socket connections to biometric hardware. Electron bridges web tech with local hardware access.
 
-### 2.3. Hardware Recommendation: Fingerprint Scanner
+### 2.3. Selected Hardware Devices
 
-| Model | Price (VND) | SDK Support | Pros |
-| :--- | :--- | :--- | :--- |
-| **(Recommended) DigitalPersona U.are.U 4500** | ~2,000,000 - 3,000,000 | Windows SDK + Node.js wrapper available | Industry standard, excellent accuracy, widely used in Vietnam |
-| SecuGen Hamster Pro 20 (HU20) | ~1,500,000 - 2,500,000 | Windows SDK + C#/Node bindings | Good accuracy, compact, budget-friendly |
-| ZKTeco ZK4500 | ~1,200,000 - 1,800,000 | Windows SDK | Cheapest option, decent for basic use |
-
-> [!TIP]
-> **Recommendation:** The **DigitalPersona U.are.U 4500** is the safest choice. It has the most mature SDK, widest community support, and is commonly used in banking/enterprise biometric systems in Vietnam. Simply plug the USB scanner into the PC and the app detects it automatically.
+1. **Biometric Fingerprint Terminal: ZKTeco K60**
+   - **Type:** Standalone time attendance & access terminal (color display, voice prompt, battery backup).
+   - **Connectivity:** LAN cable (RJ45), static IP, TCP/IP port 4370.
+   - **Mechanism:** Listens for real-time attendance events (`node-zklib`). When a member scans their finger, the event triggers instant member profile lookup and validation on the reception PC.
+2. **Thermal Receipt Printer: XPrinter XP-T80Q**
+   - **Type:** 80mm receipt printer with auto-cutter.
+   - **Connectivity:** USB cable plugged into reception counter PC (or LAN).
+   - **Protocol:** Industry-standard ESC/POS protocol.
 
 ---
 
 ## 3. System Architecture
 
-The company has a **dedicated server room with Windows Server**. The database and API server will run centrally on this server. All reception PCs connect to it via the internal LAN network.
+The company has a **dedicated server room with Windows Server**. The database and API server will run centrally on this server. All reception PCs and ZKTeco K60 devices connect to it via the internal LAN network.
 
 ```
 ┌──────────────── Server Room ────────────────┐
@@ -57,35 +57,34 @@ The company has a **dedicated server room with Windows Server**. The database an
 │   Windows Server                            │
 │   ┌───────────────────────────────────┐     │
 │   │  PostgreSQL Database              │     │
-│   │  (members, fingerprints, logs)    │     │
+│   │  (members, cards, check-in logs)  │     │
 │   ├───────────────────────────────────┤     │
 │   │  Node.js API Server (Express)    │     │
 │   │  (REST API for all operations)    │     │
 │   └──────────────┬────────────────────┘     │
 │                  │                          │
 └──────────────────┼──────────────────────────┘
-                   │ LAN Network
-        ┌──────────┼──────────┐
-        │          │          │
-   ┌────▼────┐ ┌───▼────┐ ┌───▼────┐
-   │  PC #1  │ │ PC #2  │ │ PC #3  │
-   │Counter 1│ │Counter 2│ │ Admin  │
-   │         │ │         │ │        │
-   │Electron │ │Electron │ │Electron│
-   │  App    │ │  App    │ │  App   │
-   │         │ │         │ │        │
-   │[USB FP] │ │[USB FP] │ │        │
-   │[Printer]│ │[Printer]│ │        │
-   └─────────┘ └─────────┘ └────────┘
+                   │ LAN Network (TCP/IP)
+        ┌──────────┼───────────────┬─────────────────┐
+        │          │               │                 │
+   ┌────▼────┐ ┌───▼────┐    ┌─────▼─────┐     ┌─────▼─────┐
+   │  PC #1  │ │ PC #2  │    │ ZKTeco K60│     │ ZKTeco K60│
+   │Counter 1│ │Counter 2│    │ #1 (Gate1)│     │ #2 (Gate2)│
+   │         │ │         │    │           │     │           │
+   │Electron │ │Electron │    │[FP Sensor]│     │[FP Sensor]│
+   │  App    │ │  App    │    └───────────┘     └───────────┘
+   │    │    │ │    │    │
+   │[XPrinter│ │[XPrinter│
+   │ XP-T80Q]│ │ XP-T80Q]│
+   │ (USB)   │ │ (USB)   │
+   └─────────┘ └─────────┘
 ```
 
 **How it works:**
-- **Server (Server Room):** Runs PostgreSQL database + Node.js API server 24/7. All member data, fingerprint templates, and check-in logs are stored here. IT team manages backups.
-- **Client PCs (Reception counters):** Run the Electron desktop app. The app connects to the API server over LAN to read/write data. Each PC has its own USB fingerprint scanner and thermal printer attached locally.
-- **Admin PC:** Same Electron app but logged in as Admin role. No hardware needed — used for member management, reports, and data export.
-
-> [!TIP]
-> **Benefit of this architecture:** If a reception PC breaks down, just replace it and install the app — all data is safe on the server. IT team can also schedule automatic PostgreSQL backups on the server.
+- **Server (Server Room):** Runs PostgreSQL database + Node.js API server 24/7. All member profiles and check-in logs are stored here.
+- **ZKTeco K60 Terminal:** Connected to the LAN switch. Members place their finger on K60. It verifies fingerprint and emits a real-time event to the reception PC.
+- **Reception PCs:** Run the Electron app (supporting Windows 10 32-bit & 64-bit). The app catches the check-in event, verifies membership status, displays alerts if expired, and automatically triggers the XPrinter XP-T80Q via USB to print confirmation slips.
+- **Admin PC:** Same Electron app but logged in as Admin role — used for member management, receptionist account management, reports, and data export.
 
 ---
 
