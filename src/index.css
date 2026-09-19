@@ -1,28 +1,33 @@
 :root {
-  --bg-main: #06100c;
-  --bg-surface: #0d1e17;
-  --bg-card: rgba(16, 36, 28, 0.75);
-  --bg-card-hover: rgba(24, 52, 40, 0.85);
+  --bg-main: #050e0a;
+  --bg-surface: #0a1b14;
+  --bg-card: rgba(14, 32, 24, 0.78);
+  --bg-card-hover: rgba(20, 46, 35, 0.9);
   
+  --primary-950: #011d16;
   --primary-900: #022c22;
   --primary-800: #064e3b;
   --primary-700: #047857;
   --primary-600: #059669;
   --primary-500: #10b981;
   --primary-400: #34d399;
+  --primary-300: #6ee7b7;
   
+  --gold-900: #78350f;
   --gold-700: #b45309;
   --gold-600: #d97706;
   --gold-500: #f59e0b;
   --gold-400: #fbbf24;
+  --gold-300: #fde68a;
   --gold-light: #fef3c7;
   
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-dim: #64748b;
   
-  --border-color: rgba(52, 211, 153, 0.15);
-  --border-gold: rgba(245, 158, 11, 0.35);
+  --border-color: rgba(52, 211, 153, 0.18);
+  --border-gold: rgba(245, 158, 11, 0.4);
+  --border-gold-glow: 0 0 20px rgba(245, 158, 11, 0.25);
   
   --success: #10b981;
   --warning: #f59e0b;
@@ -41,7 +46,7 @@
 
 body {
   font-family: var(--font-body);
-  background: radial-gradient(circle at 50% 0%, #11281f 0%, #06100c 75%);
+  background: radial-gradient(ellipse at 50% 0%, #0d271e 0%, #050e0a 80%);
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
@@ -65,24 +70,135 @@ body {
   background: var(--primary-600);
 }
 
-/* Base Utility Classes */
+/* Typography Helpers */
+.font-display {
+  font-family: var(--font-display);
+}
+
 .gold-gradient-text {
-  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .emerald-gradient-text {
-  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 50%, #059669 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Glass Panels */
 .glass-panel {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 18px;
+  box-shadow: 0 10px 36px 0 rgba(0, 0, 0, 0.45);
+}
+
+.glass-panel-gold {
+  background: linear-gradient(135deg, rgba(20, 44, 34, 0.85) 0%, rgba(10, 25, 19, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), var(--border-gold-glow);
+}
+
+/* Keyframe Animations */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes laser-sweep {
+  0% {
+    top: 10%;
+    opacity: 0.2;
+  }
+  50% {
+    top: 85%;
+    opacity: 0.9;
+  }
+  100% {
+    top: 10%;
+    opacity: 0.2;
+  }
+}
+
+@keyframes modal-pop {
+  0% {
+    transform: scale(0.92) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-modal {
+  animation: modal-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.radar-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--primary-400);
+  animation: radar-pulse 3s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  pointer-events: none;
+}
+
+.radar-ring:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.radar-ring:nth-child(3) {
+  animation-delay: 2s;
+}
+
+/* Badges */
+.badge-tier-vip-diamond {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: #eff6ff;
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.35);
+}
+
+.badge-tier-vip-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+  color: #fffbeb;
+  border: 1px solid rgba(253, 230, 138, 0.5);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+}
+
+.badge-tier-platinum {
+  background: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
+  color: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.badge-tier-standard {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ecfdf5;
+  border: 1px solid rgba(110, 231, 183, 0.4);
 }

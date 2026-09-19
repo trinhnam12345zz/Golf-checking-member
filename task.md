@@ -12,14 +12,14 @@
   - [x] Khởi tạo dự án với Electron + React 18 + Vite.
   - [x] Cấu hình hỗ trợ Windows 10 (cả 32-bit `ia32` và 64-bit `x64`) cùng Windows 11.
   - [x] Cấu hình script đóng gói `electron-builder` xuất file `.exe`.
-- [ ] **1.2. Xây dựng Design System chuẩn Golf Club sang trọng**
-  - [ ] Bộ màu nhận diện: Xanh lục bảo (Emerald Green), Vàng ánh kim (Champagne Gold), Xám than (Charcoal Dark).
-  - [ ] Hiệu ứng kính mờ (Glassmorphism), bóng đổ mềm mại, phông chữ chuẩn quốc tế.
-  - [ ] Bộ icon & âm thanh thông báo trực quan (thành công, cảnh báo, lỗi).
-- [ ] **1.3. Thiết kế Màn hình Kiosk (Dành cho Golfer)**
-  - [ ] Giao diện chào mừng toàn màn hình sang trọng.
-  - [ ] Vùng hướng dẫn quét ngón tay kèm hoạt ảnh động (Lottie / CSS Pulse).
-  - [ ] Màn hình pop-up kết quả: Ảnh hội viên, Họ tên, Mã thẻ, Hạng thẻ, Lời chào mừng.
+- [x] **1.2. Xây dựng Design System chuẩn Golf Club sang trọng**
+  - [x] Bộ màu nhận diện: Xanh lục bảo (Emerald Green), Vàng ánh kim (Champagne Gold), Xám than (Charcoal Dark).
+  - [x] Hiệu ứng kính mờ (Glassmorphism), bóng đổ mềm mại, phông chữ chuẩn quốc tế.
+  - [x] Bộ icon & âm thanh thông báo trực quan (thành công, cảnh báo, lỗi) bằng Web Audio API.
+- [x] **1.3. Thiết kế Màn hình Kiosk (Dành cho Golfer)**
+  - [x] Giao diện chào mừng toàn màn hình sang trọng kèm tiện ích thời tiết sân golf.
+  - [x] Vùng hướng dẫn quét ngón tay kèm hoạt ảnh radar mở rộng và tia quét laser.
+  - [x] Màn hình pop-up kết quả: Ảnh hội viên, Họ tên, Mã thẻ, Hạng thẻ, Tủ đồ Locker và cảnh báo thẻ hết hạn.
 - [ ] **1.4. Thiết kế Màn hình Lễ tân (Dành cho Nhân viên)**
   - [ ] Thanh trạng thái kết nối phần cứng (Máy K60: Online/Offline, Máy in: Online/Offline, Server: Connected).
   - [ ] Bảng điều khiển Check-in thời gian thực kèm âm báo.

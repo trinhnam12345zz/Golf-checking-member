@@ -12,6 +12,7 @@ import {
   Settings,
   AlertCircle
 } from 'lucide-react';
+import KioskView from './components/KioskView.jsx';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('kiosk');
@@ -230,62 +231,7 @@ export default function App() {
 
         {/* Dynamic Viewport according to Active Tab */}
         {activeTab === 'kiosk' ? (
-          /* KIOSK VIEW PREVIEW */
-          <div className="glass-panel" style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '60px 40px',
-            textAlign: 'center',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            <div style={{
-              width: '120px',
-              height: '120px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(2, 44, 34, 0.1) 70%)',
-              border: '2px solid rgba(52, 211, 153, 0.4)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '24px',
-              boxShadow: '0 0 40px rgba(16, 185, 129, 0.3)',
-              animation: 'pulse 2s infinite'
-            }}>
-              <Fingerprint size={64} color="#34d399" />
-            </div>
-
-            <h3 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '32px',
-              fontWeight: 700,
-              marginBottom: '12px'
-            }}>
-              Xin Vui Lòng Đặt Ngón Tay Lên Máy Quét
-            </h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '500px', lineHeight: 1.6 }}>
-              Đặt ngón tay vào máy chấm công <strong>ZKTeco K60</strong> tại quầy. Hệ thống sẽ tự động nhận diện và in phiếu xác nhận ngay lập tức.
-            </p>
-
-            <div style={{
-              marginTop: '40px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
-              background: 'rgba(255,255,255,0.03)',
-              padding: '12px 24px',
-              borderRadius: '30px',
-              border: '1px solid rgba(255,255,255,0.06)',
-              fontSize: '13px',
-              color: 'var(--text-muted)'
-            }}>
-              <span>Chưa đăng ký vân tay?</span>
-              <span style={{ color: 'var(--gold-400)', fontWeight: 600 }}>Vui lòng liên hệ Lễ tân để lấy mẫu</span>
-            </div>
-          </div>
+          <KioskView />
         ) : (
           /* RECEPTIONIST VIEW PREVIEW */
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px', flex: 1 }}>
