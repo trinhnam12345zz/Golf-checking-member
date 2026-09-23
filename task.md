@@ -20,13 +20,13 @@
   - [x] Giao diện chào mừng toàn màn hình sang trọng kèm tiện ích thời tiết sân golf.
   - [x] Vùng hướng dẫn quét ngón tay kèm hoạt ảnh radar mở rộng và tia quét laser.
   - [x] Màn hình pop-up kết quả: Ảnh hội viên, Họ tên, Mã thẻ, Hạng thẻ, Tủ đồ Locker và cảnh báo thẻ hết hạn.
-- [ ] **1.4. Thiết kế Màn hình Lễ tân (Dành cho Nhân viên)**
-  - [ ] Thanh trạng thái kết nối phần cứng (Máy K60: Online/Offline, Máy in: Online/Offline, Server: Connected).
-  - [ ] Bảng điều khiển Check-in thời gian thực kèm âm báo.
-  - [ ] Pop-up cảnh báo đỏ đặc biệt khi **Thẻ hết hạn** hoặc **Thẻ bị khóa**.
-- [ ] **1.5. Thiết kế Mẫu Hóa đơn In Bill (Thermal Receipt Preview)**
-  - [ ] Thiết kế mẫu phiếu khổ 80mm chuẩn máy in XPrinter XP-T80Q.
-  - [ ] Thể hiện đầy đủ: Tên sân golf, Logo, Họ tên Golfer, Mã thẻ, Hạng thẻ, Ngày giờ check-in, Mã tra cứu, Lời chúc mừng.
+- [x] **1.4. Thiết kế Màn hình Lễ tân (Dành cho Nhân viên)**
+  - [x] Thanh trạng thái kết nối phần cứng (Máy K60: Online/Offline, Máy in: Online/Offline, Server: Connected).
+  - [x] Bảng điều khiển Check-in thời gian thực kèm âm báo.
+  - [x] Pop-up cảnh báo đỏ đặc biệt khi **Thẻ hết hạn** hoặc **Thẻ bị khóa**.
+- [x] **1.5. Thiết kế Mẫu Hóa đơn In Bill (Thermal Receipt Preview)**
+  - [x] Thiết kế mẫu phiếu khổ 80mm chuẩn máy in XPrinter XP-T80Q.
+  - [x] Thể hiện đầy đủ: Tên sân golf, Logo, Họ tên Golfer, Mã thẻ, Hạng thẻ, Ngày giờ check-in, Mã tra cứu, Lời chúc mừng.
 
 ---
 

@@ -202,3 +202,324 @@ body {
   color: #ecfdf5;
   border: 1px solid rgba(110, 231, 183, 0.4);
 }
+
+/* ============================================================ */
+/* Phase 1.4 — Receptionist Dashboard Styles                     */
+/* ============================================================ */
+
+/* Hardware status dot — pulsing online/offline indicator */
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 currentColor; }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px transparent; }
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-dot.online {
+  background: #10b981;
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+.status-dot.offline {
+  background: #ef4444;
+  animation: status-pulse 1.2s ease-in-out infinite;
+}
+
+.status-dot.warning {
+  background: #f59e0b;
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+/* Flash highlight for new check-in row */
+@keyframes flash-row {
+  0% { background: rgba(251, 191, 36, 0.25); }
+  100% { background: transparent; }
+}
+
+.flash-highlight {
+  animation: flash-row 2.5s ease-out forwards;
+}
+
+/* Danger alert modal overlay */
+@keyframes shake-danger {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.alert-modal-danger {
+  border: 2px solid rgba(239, 68, 68, 0.6) !important;
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.3), 0 20px 60px rgba(0, 0, 0, 0.7) !important;
+}
+
+.alert-modal-danger.shake {
+  animation: shake-danger 0.5s ease-in-out;
+}
+
+/* Check-in table styles */
+.checkin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+
+.checkin-table th {
+  text-align: left;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.checkin-table td {
+  padding: 12px 14px;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.checkin-table tbody tr {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.checkin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.checkin-table tbody tr td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.checkin-table tbody tr td:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+.checkin-table tbody tr.row-blocked {
+  background: rgba(239, 68, 68, 0.06);
+  border-left: 3px solid #ef4444;
+}
+
+.checkin-table tbody tr.row-warning {
+  background: rgba(245, 158, 11, 0.05);
+  border-left: 3px solid #f59e0b;
+}
+
+.checkin-table tbody tr.row-unknown {
+  background: rgba(100, 116, 139, 0.06);
+  border-left: 3px solid #64748b;
+}
+
+/* Status pill badges */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.status-pill.success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.status-pill.blocked {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+.status-pill.expiring {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fde68a;
+}
+
+.status-pill.unknown {
+  background: rgba(100, 116, 139, 0.15);
+  color: #94a3b8;
+}
+
+/* Action buttons in table */
+.btn-table-action {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-table-action:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--primary-400);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.btn-table-action.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Hardware status bar */
+.hw-status-bar {
+  display: flex;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.hw-status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  transition: all 0.3s;
+}
+
+.hw-status-item.connected {
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.hw-status-item.disconnected {
+  border-color: rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.04);
+}
+
+/* ============================================================ */
+/* Phase 1.5 — Thermal Receipt Paper Styles                      */
+/* ============================================================ */
+
+.receipt-paper {
+  width: 302px; /* ≈ 80mm at 96dpi */
+  background: #fefefe;
+  color: #1a1a1a;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 24px 16px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Torn paper edge effect — top */
+.receipt-paper::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(135deg, #fefefe 33.33%, transparent 33.33%),
+              linear-gradient(225deg, #fefefe 33.33%, transparent 33.33%);
+  background-size: 12px 8px;
+}
+
+/* Torn paper edge effect — bottom */
+.receipt-paper::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(315deg, #fefefe 33.33%, transparent 33.33%),
+              linear-gradient(45deg, #fefefe 33.33%, transparent 33.33%);
+  background-size: 12px 8px;
+}
+
+.receipt-divider {
+  border: none;
+  border-top: 1px dashed #999;
+  margin: 10px 0;
+}
+
+.receipt-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.receipt-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+
+.receipt-header p {
+  font-size: 10px;
+  color: #666;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.receipt-row .label {
+  color: #666;
+  font-size: 11px;
+}
+
+.receipt-row .value {
+  font-weight: 700;
+  font-size: 12px;
+  text-align: right;
+}
+
+.receipt-barcode {
+  text-align: center;
+  padding: 12px 0 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  letter-spacing: 6px;
+  font-weight: 700;
+}
+
+.receipt-footer {
+  text-align: center;
+  font-size: 10px;
+  color: #888;
+  margin-top: 6px;
+}
+
+.receipt-footer .wish {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+/* Scrollable container for check-in list */
+.checkin-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 360px);
+}
