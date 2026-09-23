@@ -148,3 +148,23 @@ Dựa trên thuật toán phát hiện cộng đồng của Graphify, toàn bộ
 | **Xử lý ngoại lệ (Thẻ hết hạn/mượn thẻ)** | 🟢 Đầy đủ 100% | Card Status Validator chặn trực tiếp trước khi lệnh in được kích hoạt. |
 | **Tách biệt môi trường Dev & Go-live** | 🟢 Đầy đủ 100% | Môi trường Dev dùng SQLite + giả lập thiết bị; Go-live chuyển sang Postgres + thiết bị thật. |
 | **Hệ điều hành máy trạm** | 🟢 Đầy đủ 100% | Hỗ trợ Windows 10 (cả bản 32-bit và 64-bit) lẫn Windows 11. |
+
+---
+
+## 5. Nhật Ký Quyết Định Kiến Trúc (Architecture Decisions Memory)
+
+### 5.1. Khả năng tương thích và linh hoạt thiết bị (Hardware Flexibility)
+* **Máy in hóa đơn (Receipt Printer):** Hệ thống dùng chuẩn **ESC/POS** (qua thư viện `node-thermal-printer`). Tương thích ~95% các loại máy in nhiệt khổ 80mm trên thị trường (Epson, Bixolon, XPrinter...). Đổi máy in rất dễ dàng (Plug & Play).
+* **Máy quét vân tay (Biometric):**
+  * **Cùng hãng ZKTeco (chuẩn TCP/IP 4370):** Tương thích 100% nhờ giao thức mạng chung.
+  * **Khác hãng (hoặc chuyển sang đầu đọc vân tay cắm USB):** Đòi hỏi thay đổi lớn về kiến trúc. Phải xây dựng "Hardware Abstraction Layer" (Adapter Pattern), nhúng C++ SDK của hãng mới, và tự tải hệ thống so khớp vân tay (1:N Matching) trực tiếp trên máy PC lễ tân.
+* **Quyết định (Ngày 23/09/2026):** Chốt giữ nguyên phương án dùng **Máy chấm công ZKTeco K60 (LAN TCP/IP)** vì độ ổn định cực cao, thiết bị tự xử lý phần nặng (matching vân tay), phần mềm PC được giảm tải (chỉ nghe kết quả), và tránh được rủi ro xung đột thư viện SDK khi cài trên các bản Windows 32/64-bit khác nhau.
+
+### 5.2. Cơ chế kết nối: Real-time Event Hook (TCP Socket vs Polling)
+* **Không dùng Polling (Hỏi vòng):** Phần mềm không gửi lệnh hỏi thiết bị liên tục định kỳ (cách này gây trễ dữ liệu và hao tốn tài nguyên máy tính).
+* **Dùng Real-time Socket Listening ("Nhận cuộc gọi"):** Phần mềm mở một kết nối TCP Socket tới thiết bị và "ngủ" ở chế độ chờ (CPU 0%). Khi khách quét vân tay, K60 tự đẩy (Push) một gói tin sự kiện qua mạng LAN. Hệ điều hành Windows lập tức đánh thức phần mềm để xử lý. Tổng thời gian xử lý (quét vân tay ➔ tra cứu DB ➔ hiển thị màn hình ➔ nhả lệnh in) chỉ mất **< 50 mili-giây**.
+
+### 5.3. Logic kiểm tra thẻ hết hạn (Phân tách trách nhiệm)
+* Máy vân tay ZKTeco **không** lưu ngày hết hạn hay tên người. Nó chỉ lưu: **Mẫu vân tay** và **ID (VD: 1234)**.
+* Khi quét, ZKTeco chỉ gửi `ID 1234` về phần mềm. Toàn bộ logic tra cứu tên (Mr. Minh), hạng thẻ (Diamond), ngày hết hạn, cấp tủ Locker... đều diễn ra tại **Database của phần mềm (PostgreSQL/SQLite)**.
+* Nhờ thiết kế này, luật Business Logic (Ví dụ: Thẻ còn 5 ngày hiện cảnh báo vàng) hoàn toàn linh hoạt, muốn sửa luật chỉ cần sửa code phần mềm, không bao giờ phải chạm vào cấu hình máy phần cứng.
